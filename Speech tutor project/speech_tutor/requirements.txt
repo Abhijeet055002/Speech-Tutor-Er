@@ -1,0 +1,8 @@
+gradio==3.41.2
+faster-whisper==1.0.1
+openai-whisper==20240930
+requests
+pydub
+torch>=2.0
+torchaudio
+Box

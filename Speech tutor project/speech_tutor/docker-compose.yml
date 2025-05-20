@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  speech-tutor:
+    build: .
+    network_mode: host
+    runtime: nvidia
+    environment:
+      - OLLAMA_HOST=http://localhost:11434
+    restart: always

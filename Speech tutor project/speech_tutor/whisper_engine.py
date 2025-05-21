@@ -1,6 +1,10 @@
 from faster_whisper import WhisperModel
 
-model = WhisperModel("base.en", device="cuda", compute_type="float16")
+# old (float16 on CPU)
+# Option A: use float32 (full precision)
+model = WhisperModel("base.en", device="cpu", compute_type="float32")
+
+
 
 def transcribe(audio_path):
     print("⚙️ Received audio:", audio_path)

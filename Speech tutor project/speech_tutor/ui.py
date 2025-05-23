@@ -179,11 +179,11 @@ def create_ui(generate_question_and_answer, tutor_conversation, generate_intervi
         )
         
         # Auto-copy custom topic to question field
-        custom_topic_box.change(
-            fn=lambda text: gr.update(value=text),
-            inputs=custom_topic_box,
-            outputs=question_box
-        )
+        # custom_topic_box.change(
+        #     fn=lambda text: gr.update(value=text),
+        #     inputs=custom_topic_box,
+        #     outputs=question_box
+        # )
 
         # Generate question flow
         def update_current_topic(choice_mode, dropdown_value, custom_value):

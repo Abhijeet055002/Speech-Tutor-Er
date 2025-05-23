@@ -114,7 +114,42 @@ def create_ui(generate_question_and_answer, tutor_conversation, generate_intervi
                             question_box = gr.Textbox(label="Your Question", interactive=False, placeholder="Your question will appear here or type directly when custom topic is selected")
                             ideal_answer_box = gr.Textbox(label="Ideal Answer Reference", interactive=False, visible=False)
                             
-                            audio_input = gr.Audio(source="microphone", type="filepath", label="Record Your Answer")
+                            audio_input = gr.Audio(source="microphone", type="filepath", label="Record Your Answer", elem_classes="audio-input")
+                            
+                            # Add mic wave animation using CSS (more compatible)
+                            mic_wave = gr.HTML(
+                                value="""
+                                <style>
+                                @keyframes pulse {
+                                  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.7); }
+                                  70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(79, 70, 229, 0); }
+                                  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+                                }
+                                .pulse-circle {
+                                  background: rgba(79, 70, 229, 0.3);
+                                  border-radius: 50%;
+                                  height: 100px;
+                                  width: 100px;
+                                  margin: 0 auto;
+                                  animation: pulse 2s infinite;
+                                  display: flex;
+                                  align-items: center;
+                                  justify-content: center;
+                                }
+                                .mic-icon {
+                                  color: #4F46E5;
+                                  font-size: 40px;
+                                }
+                                </style>
+                                <div style="text-align: center; margin-top: 10px;">
+                                  <div class="pulse-circle">
+                                    <div class="mic-icon">🎤</div>
+                                  </div>
+                                  <p style="font-style: italic; color: #4B5563; margin-top: 10px;">Click microphone to start/stop recording</p>
+                                </div>
+                                """
+                            )
+                            
                             submit_btn = gr.Button("🚀 Analyze My Speech", variant="primary")
 
                     with gr.Column(scale=1):
@@ -168,6 +203,9 @@ def create_ui(generate_question_and_answer, tutor_conversation, generate_intervi
         rating_state = gr.State(0.0)
 
         # Event handlers
+        
+        # Simple approach: Always show the animation next to the microphone
+        
         topic_choice.change(
             fn=lambda mode: (
                 gr.update(visible=(mode == "Select from list")), 

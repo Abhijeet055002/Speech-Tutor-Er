@@ -200,4 +200,5 @@ app = create_ui(
 )
 
 if __name__ == "__main__":
-    app.launch(server_port=7777, share=True)
+    # Use a random port since specific ports are in use
+    app.launch(share=True)
